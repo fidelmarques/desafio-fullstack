@@ -2,16 +2,17 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { formClientesReducer } from "./FormClientes.store";
 import { formContatosReducer } from "./FormContatos.store";
 
-export const rootReducer = combineReducers({
+const rootReducer = combineReducers({
   formClientes: formClientesReducer,
   formContatos: formContatosReducer,
 });
 
 const store = configureStore({
-  reducer: {
-    formClientes: formClientesReducer,
-    formContatos: formContatosReducer,
-  },
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

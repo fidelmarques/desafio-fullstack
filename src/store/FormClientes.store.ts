@@ -1,17 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface IFormClientes {
+  name: string;
+  emailFields: string[];
+  phoneFields: string[];
+  date?: Date;
+}
+
 const formClientesSlice = createSlice({
   name: "formClientes",
-  initialState: { name: "", emailFields: [], phoneFields: [], date: "" },
+  initialState: <IFormClientes>{
+    name: "",
+    emailFields: [],
+    phoneFields: [],
+  },
   reducers: {
     updateName: (state, action) => {
       state.name = action.payload;
     },
     updateEmail: (state, action) => {
-      state.emailFields = action.payload;
+      state.emailFields.push(action.payload);
     },
     updatePhone: (state, action) => {
-      state.phoneFields = action.payload;
+      state.phoneFields.push(action.payload);
     },
     updateDate: (state, action) => {
       state.date = action.payload;

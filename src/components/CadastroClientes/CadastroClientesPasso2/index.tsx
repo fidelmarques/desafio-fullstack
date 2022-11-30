@@ -16,7 +16,9 @@ export const CadastroClientesPasso2 = () => {
   });
 
   const onSubmit = handleSubmit((data) => {
-    dispatch(updateEmail(data.emailFields));
+    data.emailFields.map((item: object) => {
+      dispatch(updateEmail(Object.values(item)[0]));
+    });
     navigate("/clientes/cadastro/3");
   });
 
@@ -24,7 +26,7 @@ export const CadastroClientesPasso2 = () => {
     <>
       <form onSubmit={onSubmit}>
         <div>
-          <button type="button" onClick={() => append({ email: "" })}>
+          <button type="button" onClick={() => append("emailFields")}>
             Adicionar e-mail
           </button>
         </div>

@@ -16,7 +16,9 @@ export const CadastroClientesPasso3 = () => {
   });
 
   const onSubmit = handleSubmit((data) => {
-    dispatch(updatePhone(data.phoneFields));
+    data.phoneFields.map((item: object) => {
+      dispatch(updatePhone(Object.values(item)[0]));
+    });
     navigate("/clientes/cadastro/confirmar");
   });
 
