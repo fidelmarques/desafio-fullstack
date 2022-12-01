@@ -1,9 +1,5 @@
-import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store";
-import { useForm } from "react-hook-form";
-import { updateName } from "../../store/FormClientes.store";
+import { Button, FormButton, FormClientesContainer, Subtitle } from "./style";
 
 export const Clientes = () => {
   const navigate = useNavigate();
@@ -13,9 +9,9 @@ export const Clientes = () => {
   };
 
   return (
-    <>
-      <h1>Clientes</h1>
-      <button onClick={comecarCadastro}>Começar!</button>
-    </>
+    <FormClientesContainer>
+      <Subtitle color="black">seja bem vindo, novo cliente!</Subtitle>
+      <FormButton onClick={comecarCadastro}>iniciar cadastro</FormButton>
+    </FormClientesContainer>
   );
 };

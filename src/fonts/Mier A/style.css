@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Mier';
+    src: local('Mier A Regular'), local('Mier-A-Regular'),
+        url('MierA-Regular.woff2') format('woff2'),
+        url('MierA-Regular.woff') format('woff'),
+        url('MierA-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }

@@ -7,13 +7,15 @@ interface IFormClientes {
   date?: Date;
 }
 
+const initialState = <IFormClientes>{
+  name: "",
+  emailFields: [],
+  phoneFields: [],
+};
+
 const formClientesSlice = createSlice({
   name: "formClientes",
-  initialState: <IFormClientes>{
-    name: "",
-    emailFields: [],
-    phoneFields: [],
-  },
+  initialState,
   reducers: {
     updateName: (state, action) => {
       state.name = action.payload;
@@ -27,10 +29,11 @@ const formClientesSlice = createSlice({
     updateDate: (state, action) => {
       state.date = action.payload;
     },
+    resetData: () => initialState,
   },
 });
 
 export const formClientesReducer = formClientesSlice.reducer;
 
-export const { updateName, updateEmail, updatePhone, updateDate } =
+export const { updateName, updateEmail, updatePhone, updateDate, resetData } =
   formClientesSlice.actions;

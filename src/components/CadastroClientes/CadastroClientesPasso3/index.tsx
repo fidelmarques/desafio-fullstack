@@ -1,9 +1,15 @@
-import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../store";
+import { useDispatch } from "react-redux";
 import { useFieldArray, useForm } from "react-hook-form";
-import { updateName, updatePhone } from "../../../store/FormClientes.store";
+import { updatePhone } from "../../../store/FormClientes.store";
+import {
+  FieldArrayContainer,
+  FormButton,
+  FormClientesContainer,
+  Subtitle,
+} from "../../../pages/Clientes/style";
+import { AddButton, DeleteButton } from "../CadastroClientesPasso2/style";
+import { HiTrash } from "react-icons/hi";
 
 export const CadastroClientesPasso3 = () => {
   const navigate = useNavigate();
@@ -23,32 +29,28 @@ export const CadastroClientesPasso3 = () => {
   });
 
   return (
-    <>
+    <FormClientesContainer>
+      <Subtitle color="black">agora, telefones para contato:</Subtitle>
       <form onSubmit={onSubmit}>
-        <div>
-          <button type="button" onClick={() => append({ phone: "" })}>
-            Adicionar telefone
-          </button>
-        </div>
-        <div>
-          {fields.map((field, index) => (
-            <section key={field.id}>
-              <label>
-                <label htmlFor="name">Telefone:</label>
-                <input
-                  type="phone"
-                  {...register(`phoneFields.${index}.phone`)}
-                />
-              </label>
-              <button type="button" onClick={() => remove(index)}>
-                Delete
-              </button>
-            </section>
-          ))}
-        </div>
-
-        <button>Próximo</button>
+        <AddButton type="button" onClick={() => append({ phone: "" })}>
+          {fields.length > 0
+            ? "adicionar mais telefones"
+            : "adicionar telefone"}
+        </AddButton>
+        {fields.map((field, index) => (
+          <FieldArrayContainer key={field.id}>
+            <input
+              type="phone"
+              placeholder={"(99) 99999-9999"}
+              {...register(`phoneFields.${index}.phone`)}
+            />
+            <DeleteButton type="button" onClick={() => remove(index)}>
+              <HiTrash />
+            </DeleteButton>
+          </FieldArrayContainer>
+        ))}
+        {fields.length > 0 && <FormButton>próximo</FormButton>}
       </form>
-    </>
+    </FormClientesContainer>
   );
 };

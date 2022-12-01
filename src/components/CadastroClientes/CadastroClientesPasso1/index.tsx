@@ -4,6 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { useForm } from "react-hook-form";
 import { updateName } from "../../../store/FormClientes.store";
+import {
+  Button,
+  FormButton,
+  FormClientesContainer,
+  Subtitle,
+} from "../../../pages/Clientes/style";
 
 export const CadastroClientesPasso1 = () => {
   const navigate = useNavigate();
@@ -13,20 +19,22 @@ export const CadastroClientesPasso1 = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data.name);
     dispatch(updateName(data.name));
     navigate("/clientes/cadastro/2");
   });
-
+  //
   return (
-    <>
+    <FormClientesContainer>
+      <Subtitle color="black">digite seu nome completo:</Subtitle>
       <form onSubmit={onSubmit}>
-        <div>
-          <label htmlFor="name">Nome completo:</label>
-          <input type="name" {...register("name")} />
-        </div>
-        <button>Próximo</button>
+        <input
+          defaultValue={name}
+          placeholder={"ex: márcio andrade"}
+          type="name"
+          {...register("name")}
+        />
+        <FormButton>próximo</FormButton>
       </form>
-    </>
+    </FormClientesContainer>
   );
 };
